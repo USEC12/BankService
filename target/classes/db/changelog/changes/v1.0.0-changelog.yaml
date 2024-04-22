@@ -1,0 +1,114 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1-create-table-currency-rates
+      author: your_username
+      changes:
+        - createTable:
+            tableName: currency_rates
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: source_currency
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: target_currency
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rate
+                  type: decimal(19,6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rate_date
+                  type: date
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 2-create-table-transactions
+      author: your_username
+      changes:
+        - createTable:
+            tableName: transactions
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: account_from
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: account_to
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: currency_shortname
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sum
+                  type: decimal(19,4)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expense_category
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: datetime
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: limit_exceeded
+                  type: boolean
+                  defaultValueBoolean: false
+
+  - changeSet:
+      id: 3-create-table-limits
+      author: your_username
+      changes:
+        - createTable:
+            tableName: limits
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: limit_sum
+                  type: decimal(19,4)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: limit_currency_shortname
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: limit_datetime
+                  type: timestamp
+                  constraints:
+                    nullable: false
